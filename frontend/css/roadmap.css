@@ -1,0 +1,29 @@
+/* Interactive roadmap. Builds on style.css, programs.css and tasks.css */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.6rem}
+.track-btn{display:flex;align-items:center;gap:1rem;min-height:76px;padding:1rem 1.3rem;text-align:left;font:inherit;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:var(--r);box-shadow:var(--sh1);cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,background .25s,color .25s,border-color .25s;-webkit-tap-highlight-color:transparent}
+.track-btn svg{flex:none;width:34px;height:34px;padding:7px;border-radius:10px;background:var(--mist);fill:none;stroke:var(--gd);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:background .25s,stroke .25s}
+.track-btn b{display:block;font:700 1.1rem var(--head)}
+.track-btn small{display:block;font-size:.9rem;line-height:1.4;color:var(--muted);transition:color .25s}
+.track-btn:hover{transform:translateY(-3px);border-color:var(--gd);box-shadow:var(--sh2)}
+.track-btn:active{transform:scale(.98)}
+.track-btn[aria-pressed='true']{background:var(--ink);border-color:var(--ink);color:#fff}
+.track-btn[aria-pressed='true'] small{color:#d6dcf0}
+.track-btn[aria-pressed='true'] svg{background:rgba(255,255,255,.14);stroke:var(--green)}
+.now{background:var(--mist);border:1px solid var(--line);border-left:6px solid var(--green);border-radius:var(--r);padding:1.2rem 1.5rem;margin-bottom:2.6rem}
+.now-l{font:600 .85rem var(--head);color:var(--muted)}
+.now-t{font:800 clamp(1.5rem,3.6vw,2.2rem)/1.15 var(--head);text-transform:uppercase;letter-spacing:.01em}
+.now-m{color:var(--muted);margin-top:.2rem}
+.timeline[data-track='data-analytics'] .node{background:var(--gd)}
+.timeline.swap .t{animation:up .5s var(--ease) both}
+.timeline.swap .t:nth-child(2){animation-delay:.05s}
+.timeline.swap .t:nth-child(3){animation-delay:.1s}
+.timeline.swap .t:nth-child(4){animation-delay:.15s}
+.timeline.swap .t:nth-child(5){animation-delay:.2s}
+.timeline.swap .t:nth-child(6){animation-delay:.25s}
+.timeline.swap .t:nth-child(7){animation-delay:.3s}
+.timeline.swap .t:nth-child(8){animation-delay:.35s}
+.noscript{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.3rem}
+@media (max-width:720px){
+  .tracks{grid-template-columns:1fr}
+  .track-btn{min-height:68px}
+}

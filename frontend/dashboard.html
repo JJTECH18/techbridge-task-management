@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='theme-color' content='#0D004D'>
+<meta name='api-base' content=''>
+<title>Intern Dashboard | TechBridge</title>
+<meta name='description' content='The TechBridge intern dashboard: track your 8 internship tasks, see your progress, explore the Challenge Hub and learn about modern web technologies.'>
+<link rel='icon' href='images/favicon.png' type='image/png'>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link href='https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Public+Sans:wght@400;500;600&display=swap' rel='stylesheet'>
+<link rel='stylesheet' href='css/style.css'>
+<link rel='stylesheet' href='css/programs.css'>
+<link rel='stylesheet' href='css/tasks.css'>
+<link rel='stylesheet' href='css/dashboard.css'>
+</head>
+<body>
+<a class='skip' href='#main'>Skip to content</a>
+
+<header class='site-header'>
+  <div class='wrap bar'>
+    <a class='brand' href='index.html' aria-label='TechBridge home'><img src='images/techbridge-logo.png' alt='TechBridge' width='326' height='68'></a>
+    <input type='checkbox' id='menu-toggle' class='menu-toggle'>
+    <label for='menu-toggle' class='menu-btn' aria-label='Toggle menu'><span></span></label>
+    <nav class='nav' aria-label='Main'>
+      <a href='index.html'>Home</a>
+      <a href='programs.html'>Programs</a>
+      <a href='tasks.html'>Tasks</a>
+      <a href='roadmap.html'>Roadmap</a>
+      <a href='challenges.html'>Challenges</a>
+      <a href='dashboard.html' aria-current='page'>Dashboard</a>
+      <a href='index.html#contact'>Contact</a>
+      <a class='btn btn-sm' href='https://forms.gle/8EbdSy5ttGfLZfjv5' target='_blank' rel='noopener'>Apply Now</a>
+    </nav>
+  </div>
+</header>
+
+<main id='main'>
+
+<section class='hero ph'>
+  <span class='shape s1' aria-hidden='true'></span>
+  <span class='shape s2' aria-hidden='true'></span>
+  <span class='shape s3' aria-hidden='true'></span>
+  <div class='wrap hero-copy'>
+    <p class='crumb a1'><a href='index.html'>Home</a> / Intern Dashboard</p>
+    <div class='welcome a1'>
+      <span class='avatar' id='avatar' aria-hidden='true'>A</span>
+      <div>
+        <h1 id='welcome-title'>Welcome back, Alex</h1>
+        <p class='role' id='intern-track'>Web Development Intern</p>
+      </div>
+    </div>
+    <p class='lead a2' id='welcome-msg'>Here is your internship at a glance. Mark tasks as you finish them and watch your progress grow.</p>
+    <p class='a3 status-line'>Internship Status: <span class='pill' id='intern-status'>In Progress</span></p>
+    <p class='sample a3'>Sample intern profile for demonstration.</p>
+  </div>
+</section>
+
+<div class='bstatus-bar'>
+  <div class='wrap'>
+    <p class='bstatus' id='backend-status' data-s='checking' role='status'><span class='dot' aria-hidden='true'></span><span>Backend Status: <strong id='backend-text'>Checking...</strong></span><span class='src'>Data source: TechBridge Task API (<code>/api/tasks</code>)</span></p>
+  </div>
+</div>
+
+<section class='section' id='progress'>
+  <div class='wrap'>
+    <h2>Internship progress</h2>
+    <div class='prog-grid'>
+      <div class='pcard'>
+        <p class='big-count'><span id='done-count'>3</span> / <span id='total-count'>8</span> Tasks Completed</p>
+        <div class='pbar' role='progressbar' id='pbar' aria-label='Overall internship progress' aria-valuemin='0' aria-valuemax='100' aria-valuenow='37.5'><i id='pfill'></i></div>
+        <div class='pmeta'><strong id='pct'>37.5%</strong><span><span id='left-count'>5</span> Tasks Remaining</span></div>
+        <ul class='mini'>
+          <li><b id='s-total'>8</b><span>Total tasks</span></li>
+          <li><b id='s-done'>3</b><span>Completed</span></li>
+          <li><b id='s-left'>5</b><span>Remaining</span></li>
+        </ul>
+      </div>
+      <div class='pcard current'>
+        <p class='kicker'>Current task</p>
+        <h3 id='current-title'>Task 4</h3>
+        <p id='current-desc'></p>
+        <button type='button' class='btn' id='continue-btn'>Continue Task</button>
+      </div>
+    </div>
+    <p class='celebrate' id='celebrate' hidden>All 8 tasks completed. Excellent work, the internship is complete!</p>
+  </div>
+</section>
+
+<section class='section tint' id='tracker'>
+  <div class='wrap'>
+    <div class='tk-head'>
+      <div><h2>Task tracker</h2><p class='sub'>All 8 internship tasks, loaded from the backend API. Mark a task as completed and the server saves the change.</p></div>
+      <button type='button' class='reset' id='reset-btn'>Reset progress</button>
+    </div>
+    <div class='fgroup' id='task-filters' role='group' aria-label='Filter tasks by status'>
+      <button type='button' class='fbtn' data-filter='All' aria-pressed='true'>All</button>
+      <button type='button' class='fbtn' data-filter='Completed' aria-pressed='false'>Completed</button>
+      <button type='button' class='fbtn' data-filter='In Progress' aria-pressed='false'>In Progress</button>
+      <button type='button' class='fbtn' data-filter='Not Started' aria-pressed='false'>Not Started</button>
+    </div>
+    <noscript><p class='noscript'>The task tracker needs JavaScript. You can read the full task list on the <a class='link' href='tasks.html'>Tasks page</a>.</p></noscript>
+    <div id='task-status-area' aria-live='polite'></div>
+    <ul class='tk-list' id='task-list' hidden></ul>
+    <p class='empty' id='task-empty' hidden>No tasks match this filter.</p>
+  </div>
+</section>
+
+<section class='section' id='challenge-hub'>
+  <div class='wrap'>
+    <div class='hubcard'>
+      <div>
+        <p class='kicker'>Challenge Hub</p>
+        <h2>9 Challenges Available</h2>
+        <p>Practise your skills with Data Analytics and Web Development challenges. Filter by track or difficulty and open any challenge for the full details.</p>
+      </div>
+      <a class='btn btn-white btn-lg' href='challenges.html'>Explore Challenges</a>
+    </div>
+  </div>
+</section>
+
+<section class='section tint' id='technologies'>
+  <div class='wrap'>
+    <h2>Modern Web Technologies</h2>
+    <p class='sub'>A complete web platform is built from many tools. Pick one to learn what it is and where it is used.</p>
+    <div class='tech-tabs' id='tech-tabs' role='group' aria-label='Choose a technology'>
+      <button type='button' class='tab' data-tech='nextjs' aria-pressed='true'>Next.js</button>
+      <button type='button' class='tab' data-tech='vue' aria-pressed='false'>Vue.js</button>
+      <button type='button' class='tab' data-tech='angular' aria-pressed='false'>Angular</button>
+      <button type='button' class='tab' data-tech='backend' aria-pressed='false'>Backend</button>
+    </div>
+    <noscript><p class='noscript'>The technology explorer needs JavaScript.</p></noscript>
+    <article class='tech-panel' id='tech-panel' aria-live='polite'></article>
+  </div>
+</section>
+
+<section class='section' id='api'>
+  <div class='wrap'>
+    <h2>How this dashboard gets its data</h2>
+    <p class='sub'>The page asks a Node.js and Express backend for the tasks using <code>fetch()</code>. No task information is written inside the page.</p>
+    <ol class='flow' aria-label='Data flow'>
+      <li>Intern Dashboard</li>
+      <li>JavaScript fetch()</li>
+      <li>REST API (Node.js + Express)</li>
+      <li>Task data (tasks.json)</li>
+    </ol>
+    <div class='tablewrap'>
+      <table class='api-table'>
+        <thead><tr><th scope='col'>Method</th><th scope='col'>Endpoint</th><th scope='col'>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><span class='method get'>GET</span></td><td><code>/api/tasks</code></td><td>Get all tasks</td></tr>
+          <tr><td><span class='method get'>GET</span></td><td><code>/api/tasks/:id</code></td><td>Get one task</td></tr>
+          <tr><td><span class='method put'>PUT</span></td><td><code>/api/tasks/:id</code></td><td>Update a task's status. Body: <code>{"status":"completed"}</code></td></tr>
+          <tr><td><span class='method get'>GET</span></td><td><code>/api/health</code></td><td>Check that the backend is running</td></tr>
+          <tr><td><span class='method post'>POST</span></td><td><code>/api/reset</code></td><td>Reset all tasks to the starting sample</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class='site-footer'>
+  <div class='wrap foot'>
+    <div>
+      <p class='brand-foot'><span>Tech</span>Bridge</p>
+      <p>by Baselink Services Limited</p>
+      <p class='tag'>Bridging Learning to Real-World Experience</p>
+    </div>
+    <nav aria-label='Footer'>
+      <a href='index.html'>Home</a>
+      <a href='programs.html'>Programs</a>
+      <a href='index.html#internship'>Internship</a>
+      <a href='tasks.html'>Tasks</a>
+      <a href='roadmap.html'>Roadmap</a>
+      <a href='challenges.html'>Challenges</a>
+      <a href='dashboard.html'>Dashboard</a>
+      <a href='index.html#apply'>How to apply</a>
+      <a href='index.html#community'>Community</a>
+      <a href='index.html#contact'>Contact</a>
+      <a href='mailto:techbridgebaslink@gmail.com'>Email</a>
+      <a href='https://www.linkedin.com/company/techbridge-services/' target='_blank' rel='noopener'>LinkedIn</a>
+      <a href='https://www.facebook.com/p/Baselink-Services-100066771475783/' target='_blank' rel='noopener'>Facebook</a>
+      <a href='https://www.instagram.com/techbridgeserves' target='_blank' rel='noopener'>Instagram</a>
+    </nav>
+  </div>
+  <div class='wrap copy'>&copy; 2026 TechBridge by Baselink Services Limited</div>
+</footer>
+
+<div class='toast' id='toast' role='status' aria-live='polite'></div>
+
+<dialog id='task-dialog' aria-labelledby='d-title'>
+  <div class='d-head'>
+    <div><p class='d-num' id='d-num'></p><h2 id='d-title'></h2></div>
+    <button type='button' class='d-close' id='d-close' aria-label='Close task details'>&times;</button>
+  </div>
+  <div class='d-body' id='d-body'></div>
+</dialog>
+
+<script src='js/dashboard.js'></script>
+</body>
+</html>
